@@ -21,7 +21,7 @@ sealed abstract class Concurrency {
   def cancelInProgressExpr: Option[String]
 
   @deprecated("Use cancelInProgressExpr", "0.8.5")
-  final def cancelInProgress: Option[Boolean] = cancelInProgressExpr match {
+  def cancelInProgress: Option[Boolean] = cancelInProgressExpr match {
     case Some("false") => Some(false)
     case Some("true") => Some(true)
     case _ => None
@@ -29,13 +29,10 @@ sealed abstract class Concurrency {
 }
 
 object Concurrency {
-  def apply(group: String): Concurrency =
-    Impl(group, None)
-
   def apply(group: String, cancelInProgress: Boolean): Concurrency =
     apply(group, Some(cancelInProgress))
 
-  def apply(group: String, cancelInProgress: Option[Boolean]): Concurrency =
+  def apply(group: String, cancelInProgress: Option[Boolean] = None): Concurrency =
     Impl(group, cancelInProgress.map(_.toString))
 
   def apply(group: String, cancelInProgress: Option[String])(
