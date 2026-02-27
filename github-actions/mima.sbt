@@ -6,5 +6,6 @@ mimaBinaryIssueFilters ++= Seq(
   "org.typelevel.sbt.gha.WorkflowStep#Sbt.*",
   "org.typelevel.sbt.gha.WorkflowStep#Run.*",
   "org.typelevel.sbt.gha.WorkflowStep#Use.*",
-  "org.typelevel.sbt.gha.Permissions#Specify.*"
+  "org.typelevel.sbt.gha.Permissions#Specify.*",
+  "org.typelevel.sbt.gha.Concurrency.*"
 ).map(ProblemFilters.exclude[ReversedMissingMethodProblem](_))
